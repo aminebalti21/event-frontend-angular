@@ -1,0 +1,77 @@
+<div class="event-management-container">
+    <!-- Erreur globale -->
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  <!-- Exemple de bouton de déconnexion dans une barre de navigation -->
+<button (click)="onLogout()">Se déconnecter</button>
+
+    <!-- Formulaire de création d'événement -->
+    <h2>Créer un événement</h2>
+    <form (ngSubmit)="createEvent()">
+      <div>
+        <label for="title">Titre :</label>
+        <input id="title" [(ngModel)]="newEvent.title" name="title" required />
+      </div>
+      <div>
+        <label for="description">Description :</label>
+        <textarea id="description" [(ngModel)]="newEvent.description" name="description" required></textarea>
+      </div>
+      <div>
+        <label for="date">Date :</label>
+        <input type="date" id="date" [(ngModel)]="newEvent.date" name="date" required />
+      </div>
+      <div>
+        <label for="time">time :</label>
+        <input id="time" [(ngModel)]="newEvent.time" name="time" required />
+      </div>
+      <div>
+        <label for="location">Lieu :</label>
+        <input id="location" [(ngModel)]="newEvent.location" name="location" required />
+      </div>
+      <div>
+        <label for="capacity">Capacité :</label>
+        <input type="number" id="capacity" [(ngModel)]="newEvent.maxCapacity" name="capacity" required />
+      </div>
+      <div>
+        <label for="type">type :</label>
+        <input id="type" [(ngModel)]="newEvent.type" name="type" required />
+      </div>
+      <div>
+        <label for="theme">theme :</label>
+        <input id="theme" [(ngModel)]="newEvent.theme" name="theme" required />
+      </div>
+      <div>
+        <label for="photo">photo :</label>
+        <input type="file" (change)="onFileSelected($event)" name="photo" />
+      </div>
+      
+      <button type="submit">Créer l'événement</button>
+    </form>
+  
+    <!-- Liste des événements -->
+    <h2>Liste des événements</h2>
+    <div *ngIf="events.length === 0">Aucun événement trouvé.</div>
+    <ul>
+      <li *ngFor="let event of events">
+        <div class="event-card">
+          
+            <img 
+  [src]="getPhotoUrl(event.photo)" 
+  alt="Photo de {{ event.title }}" 
+  class="event-image" 
+/>
+          
+          <h3>{{ event.title }}</h3>
+          <p><strong>Description :</strong> {{ event.description }}</p>
+          <p><strong>Date :</strong> {{ event.date | date: 'dd/MM/yyyy' }}</p>
+          <p><strong>time :</strong> {{ event.time }}</p>
+          <p><strong>Lieu :</strong> {{ event.location }}</p>
+          <p><strong>Capacité :</strong> {{ event.maxCapacity }}</p>
+          <p><strong>type :</strong> {{ event.type }}</p>
+          <p><strong>theme :</strong> {{ event.theme }}</p>
+          <button (click)="editEvent(event.id)">Modifier</button>
+          <button (click)="deleteEvent(event.id)">Supprimer</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  

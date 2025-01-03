@@ -1,0 +1,41 @@
+<h2>Modifier l'Événement</h2>
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label>Titre :</label>
+    <input [(ngModel)]="eventData.title" name="title" required />
+  </div>
+  <div>
+    <label>Description :</label>
+    <textarea [(ngModel)]="eventData.description" name="description" required></textarea>
+  </div>
+  <div>
+    <label>Lieu :</label>
+    <input [(ngModel)]="eventData.location" name="location" required />
+  </div>
+  <div>
+    <label>Date :</label>
+    <input type="date" [(ngModel)]="eventData.date" name="date" required />
+  </div>
+  <div>
+    <label>Heure :</label>
+    <input type="time" [(ngModel)]="eventData.time" name="time" required />
+  </div>
+  <div>
+    <label>Capacité Maximale :</label>
+    <input type="number" [(ngModel)]="eventData.maxCapacity" name="maxCapacity" required />
+  </div>
+  <div>
+    <label>Type :</label>
+    <input [(ngModel)]="eventData.type" name="type" required>
+      
+  </div>
+  <div>
+    <label>Thème :</label>
+    <input [(ngModel)]="eventData.theme" name="theme" required />
+  </div>
+  <div>
+    <label for="photo">Nouvelle photo (facultatif) :</label>
+    <input type="file" (change)="onFileSelected($event)" name="photo" />
+  </div>
+  <button type="submit">Enregistrer</button>
+</form>

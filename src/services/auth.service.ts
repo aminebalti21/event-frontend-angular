@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +41,22 @@ export class AuthService {
     return this.http.delete(`${this.eventApiUrl}/${id}`, { headers });
   }
 
+  // Nouvelle méthode pour récupérer l'utilisateur connecté
+  getCurrentUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']); // Rediriger vers la page de connexion si le token est manquant
+      throw new Error('Utilisateur non authentifié.');
+    }
+
+    const decodedToken = this.decodeToken(token);
+    if (!decodedToken) {
+      throw new Error('Token invalide.');
+    }
+
+    return of(decodedToken); // Retourner l'utilisateur (ID, rôle, etc.)
+  }
+
   // Méthode pour gérer la réponse de connexion
   handleLoginResponse(response: any): void {
     // Sauvegarder le token dans localStorage
@@ -54,7 +70,7 @@ export class AuthService {
     if (role === 'Admin' || role === 'Organisateur') {
       this.router.navigate(['/event-management']); // Rediriger vers la page de gestion des événements
     } else {
-      this.router.navigate(['/register']); // Rediriger vers un autre tableau de bord ou page par défaut
+      this.router.navigate(['/participant']); // Rediriger vers un autre tableau de bord ou page par défaut
     }
   }
 

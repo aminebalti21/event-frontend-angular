@@ -1,0 +1,56 @@
+<div class="container" *ngIf="isAdmin; else noAccess">
+    <h2>Gestion des utilisateurs</h2>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Rôle</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="openEditForm(user)">Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="selectedUser" class="edit-form">
+      <h3>Modifier l'utilisateur</h3>
+      <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+        <div class="form-group">
+          <label>Nom</label>
+          <input class="form-control" formControlName="name" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input class="form-control" formControlName="email" />
+        </div>
+        <div class="form-group">
+          <label>Rôle</label>
+          <select class="form-control" formControlName="role">
+            <option value="Admin">Admin</option>
+            <option value="Organisateur">Organisateur</option>
+            <option value="Participant">Participant</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+        <button type="button" class="btn btn-secondary" (click)="selectedUser = null">Annuler</button>
+      </form>
+    </div>
+  </div>
+  
+  <ng-template #noAccess>
+    <div class="alert alert-danger">
+      <p>Vous n'avez pas l'autorisation d'accéder à cette page.</p>
+    </div>
+  </ng-template>
+  

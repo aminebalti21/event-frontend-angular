@@ -12,12 +12,14 @@ import { PaymentComponent } from './payment/payment.component';
 import { RegisterParticipantComponent } from './register-participant/register-participant.component';
 import { RegisterComponent } from './register/register.component';
 import { ListOrgComponent } from './list-org/list-org.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 
 export const routes: Routes = [
         { path: 'register', component: RegisterComponent },
         { path: 'login', component: LoginComponent },
         { path: '', redirectTo: '/login', pathMatch: 'full' },
+        {path:'user' , component:UserManagementComponent},
         { path: 'event-management', component: EventManagementComponent },
         {path:'list', component:ListOrgComponent}, // Par défaut, redirige vers l'inscription
         { path: 'event/edit/:id', component: EditEventComponent },

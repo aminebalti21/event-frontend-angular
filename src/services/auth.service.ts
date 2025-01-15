@@ -8,7 +8,8 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/auth'; // URL de l'API d'authentification
-  private eventApiUrl = 'http://localhost:3000/events'; // URL de l'API pour la gestion des événements
+  private eventApiUrl = 'http://localhost:3000/events';
+  private apiUrl2 = 'http://localhost:3000/users/users'; // URL de l'API pour la gestion des événements
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -62,18 +63,24 @@ export class AuthService {
   handleLoginResponse(response: any): void {
     // Sauvegarder le token dans localStorage
     localStorage.setItem('token', response.token);
-
+  
     // Décoder le token pour obtenir le rôle
     const decodedToken = this.decodeToken(response.token);
     const role = decodedToken.role;
-
+  
     // Rediriger en fonction du rôle
-    if (role === 'Admin' || role === 'Organisateur') {
-      this.router.navigate(['/event-management']); // Rediriger vers la page de gestion des événements
+    if (role === 'Admin') {
+      this.router.navigate(['/user']); // Rediriger vers la page de gestion des utilisateurs
+    } else if (role === 'Organisateur') {
+      this.router.navigate(['/event-management']); // Rediriger vers la gestion des événements
     } else {
-      this.router.navigate(['/participant']); // Rediriger vers un autre tableau de bord ou page par défaut
+      this.router.navigate(['/participant']); // Rediriger vers la page des participants
     }
   }
+  
+  
+  
+  
 
   logout(): void {
     // Supprimer le token de localStorage
@@ -103,5 +110,26 @@ export class AuthService {
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
+  }
+
+
+
+
+
+  getUsers(): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.apiUrl2}`, { headers });
+  }
+
+  // Modifier un utilisateur
+  updateUser(id: number, userData: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.put(`${this.apiUrl2}/${id}`, userData, { headers });
+  }
+
+  // Supprimer un utilisateur
+  deleteUser(id: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.apiUrl2}/${id}`, { headers });
   }
 }

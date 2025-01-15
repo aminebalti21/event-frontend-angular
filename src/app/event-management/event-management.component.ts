@@ -78,6 +78,7 @@ export class EventManagementComponent implements OnInit {
         this.loadEvents(); // Recharger les événements après création
         this.newEvent = { title: '', description: '', date: '', time: '', location: '', maxCapacity: 0, type: '', theme: '' };
         this.selectedFile = null;
+        this.router.navigate(['/list'])
       },
       error: (err) => {
         this.error = 'Erreur lors de la création de l\'événement.';
@@ -87,24 +88,10 @@ export class EventManagementComponent implements OnInit {
   }
 
   // Modifier un événement
-  editEvent(id: number): void {
-    this.router.navigate([`/event/edit/${id}`]);
-  }
+
   onLogout() {
     this.authService.logout(); // Appeler la méthode logout du service
   }
   // Supprimer un événement
-  deleteEvent(id: number): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) {
-      this.authService.deleteEvent(id).subscribe({
-        next: () => {
-          this.loadEvents();
-        },
-        error: (err) => {
-          this.error = 'Erreur lors de la suppression de l\'événement.';
-          console.error(err);
-        },
-      });
-    }
-  }
+ 
 }

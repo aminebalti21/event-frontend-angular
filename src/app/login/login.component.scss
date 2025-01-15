@@ -1,0 +1,88 @@
+/* Container styling */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header styling */
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  /* Button styling */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .primary-btn {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .primary-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .secondary-btn {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .secondary-btn:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Error message styling */
+  .error {
+    margin-top: 15px;
+    color: red;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* Add responsive design */
+  @media (max-width: 500px) {
+    .login-container {
+      padding: 15px;
+    }
+  
+    .btn {
+      font-size: 14px;
+    }
+  }
+  

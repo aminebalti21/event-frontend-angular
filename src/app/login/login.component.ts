@@ -29,4 +29,7 @@ export class LoginComponent {
       },
     });
   }
+  goToTarget() {
+    this.router.navigate(['/register-participant']); // Naviguer vers la route cible
+  }
 }

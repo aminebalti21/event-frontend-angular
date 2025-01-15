@@ -46,7 +46,9 @@ export class ParticipantComponent implements OnInit {
     }
     return `http://localhost:3000/${photoPath}`; // Remplacer par l'URL de votre serveur backend
   }
-
+  onLogout() {
+    this.authService.logout(); // Appeler la méthode logout du service
+  }
   // Charger tous les événements
   loadEvents(): void {
     this.authService.getEvents().subscribe({

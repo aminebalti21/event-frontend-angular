@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';  // Pour l'HTTP, assure
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  user = { name: '', email: '', password: '', role: 'Participant' };  // Par défaut, le rôle est "Participant"
+  user = { name: '', email: '', password: '', role: 'Admin' };  // Par défaut, le rôle est "admin"
   error: string | null = null;
 
   constructor(private authService: AuthService) {}

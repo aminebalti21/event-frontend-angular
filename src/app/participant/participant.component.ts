@@ -10,14 +10,14 @@ import { PaymentComponent } from '../payment/payment.component';
 @Component({
   selector: 'app-participant',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, PaymentComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './participant.component.html',
   styleUrls: ['./participant.component.scss']
 })
 export class ParticipantComponent implements OnInit {
   events: any[] = [];
   error: string | null = null;
-  userId: number | null = null;  // Ajout de la variable pour stocker l'ID de l'utilisateur
+  userId: number | null = null;
 
   constructor(
     private authService: AuthService,
@@ -26,12 +26,10 @@ export class ParticipantComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Récupérer l'utilisateur connecté et son ID
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
-        this.userId = user.id; // Récupérer l'ID de l'utilisateur connecté
-        console.log('Utilisateur connecté :', user);
-        this.loadEvents(); // Charger les événements après avoir récupéré l'utilisateur
+        this.userId = user.id;
+        this.loadEvents();
       },
       error: (err) => {
         console.error('Erreur lors de la récupération de l\'utilisateur :', err);
@@ -39,21 +37,9 @@ export class ParticipantComponent implements OnInit {
     });
   }
 
-  // Fonction pour récupérer l'URL de la photo de l'événement
-  getPhotoUrl(photoPath: string | null): string {
-    if (!photoPath) {
-      return 'assets/default-image.jpg'; // Chemin de l'image par défaut
-    }
-    return `http://localhost:3000/${photoPath}`; // Remplacer par l'URL de votre serveur backend
-  }
-  onLogout() {
-    this.authService.logout(); // Appeler la méthode logout du service
-  }
-  // Charger tous les événements
   loadEvents(): void {
     this.authService.getEvents().subscribe({
       next: (data) => {
-        console.log("Événements chargés : ", data);
         this.events = data;
       },
       error: (err) => {
@@ -63,35 +49,38 @@ export class ParticipantComponent implements OnInit {
     });
   }
 
-  // Fonction pour s'inscrire à un événement
   register(eventId: number, ticketType: string): void {
     if (this.userId === null) {
       alert("Utilisateur non authentifié !");
       return;
     }
 
-    // Passer l'ID de l'utilisateur et le type de ticket
     this.participantService.registerForEvent(eventId, ticketType, this.userId).subscribe({
       next: (response) => {
-        alert(`Inscription réussie à l'événement avec un billet ${ticketType}!`);
+        alert(`Inscription réussie pour le billet ${ticketType}!`);
+        // Redirection vers la page de paiement
         this.router.navigate(['/payment'], {
           queryParams: {
-            ticketType: response.ticketType,  // Ajouter le type de ticket
-            amount: response.amount,  // Ajouter le montant
-            eventId: eventId,  // Ajouter l'ID de l'événement
-            userId: this.userId  // Ajouter l'ID de l'utilisateur
+            ticketType: response.ticketType,
+            
+            eventId: eventId,
+            userId: this.userId
           }
         });
-
-        // Mettre à jour la capacité de l'événement
-        this.events = this.events.map((event) =>
-          event.id === eventId ? { ...event, maxCapacity: event.maxCapacity - 1 } : event
-        );
       },
       error: (err) => {
         alert('Erreur lors de l\'inscription : ' + err.error.error);
         console.error(err);
       }
     });
+  }
+  getPhotoUrl(photoPath: string | null): string {
+    if (!photoPath) {
+      return 'assets/default-image.jpg'; // Chemin de l'image par défaut
+    }
+    return `http://localhost:3000/${photoPath}`; // Remplacer par l'URL de votre serveur backend
+  }
+  onLogout() {
+    this.authService.logout(); // Appeler la méthode logout du service
   }
 }

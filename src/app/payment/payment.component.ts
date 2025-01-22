@@ -1,30 +1,75 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+
 import { PaymentService } from '../../services/payment.service';
-declare var paypal: any;  // Assurez-vous que Paypal est correctement déclaré dans votre projet.
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss'],
 })
-export class PaymentComponent {
-  constructor(private paymentService: PaymentService) {}
+export class PaymentComponent implements OnInit {
+  eventId!: string;
+  userId!: string;
+  ticketType!: string;
+  price!: number;
 
-  makePayment() {
-    this.paymentService.createOrder(10.00, 'USD', 'Achat de billet').subscribe({
-      next: (response) => {
-        // Redirection vers PayPal pour l'approbation
-        window.location.href = response.approvalUrl;
-      },
-      error: (error) => {
-        console.error('Erreur lors de la création du paiement:', error);
-      },
+  constructor(private route: ActivatedRoute, private router: Router,private PaymentService:PaymentService) {}
+
+  ngOnInit(): void {
+    // Récupérer les paramètres de l'URL
+    this.route.queryParams.subscribe(params => {
+      this.eventId = params['eventId'];
+      this.userId = params['userId'];
+      this.ticketType = params['ticketType'];
+      
+
+      // Vérification si les paramètres sont bien présents
+      if (!this.eventId || !this.userId || !this.ticketType ) {
+        console.error('Paramètres manquants :', {
+          eventId: this.eventId,
+          userId: this.userId,
+          ticketType: this.ticketType,
+          
+        });
+        alert('Paramètres manquants, redirigez l\'utilisateur vers la page d\'inscription.');
+      }
     });
+  }
+
+  pay(): void {
+    if (!this.eventId || !this.userId || !this.ticketType ) {
+      console.error('Erreur de paiement : Paramètres manquants');
+      return;
+    }
+
+    // Logique pour le paiement, par exemple, appeler PaymentService pour créer la session de paiement
+    this.PaymentService.createCheckoutSession(this.ticketType, this.eventId, this.userId)
+      .then(() => {
+        // Enregistrer le ticket après le paiement réussi
+        const ticketData = {
+          eventId: this.eventId,
+          userId: this.userId,
+          type: this.ticketType,
+          status: 'paid',
+          price: this.price,
+          purchasedAt: new Date(),
+        };
+
+        this.PaymentService.saveTicket(ticketData)
+          .then(response => {
+            console.log('Ticket enregistré avec succès.', response);
+          })
+          .catch(error => {
+            console.error('Erreur lors de l\'enregistrement du ticket :', error);
+          });
+      })
+      .catch(error => {
+        console.error('Erreur lors de la création de la session de paiement :', error);
+      });
   }
 }

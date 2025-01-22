@@ -1,1 +1,13 @@
-<button (click)="makePayment()">Payer</button>
+<div class="payment-container">
+    <h2>Finaliser le paiement</h2>
+  
+    <div class="ticket-details">
+      <p><strong>Événement :</strong> {{ eventId }}</p>
+      <p><strong>Utilisateur :</strong> {{ userId }}</p>
+      <p><strong>Type de billet :</strong> {{ ticketType }}</p>
+      <p><strong>Montant :</strong> {{ price / 100 | currency: 'USD' }}</p> <!-- Assurez-vous que 'amount' est en cents, donc on divise par 100 -->
+    </div>
+  
+    <button (click)="pay()" class="pay-button">Payer maintenant</button>
+  </div>
+  

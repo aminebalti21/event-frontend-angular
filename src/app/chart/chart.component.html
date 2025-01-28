@@ -1,0 +1,51 @@
+<div class="container mt-5">
+    <h1>Statistiques globales</h1>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h2>Total Participants</h2>
+        <p>{{ totalParticipants }}</p>
+      </div>
+      <div class="stat-card">
+        <h2>Total Événements</h2>
+        <p>{{ totalEvents }}</p>
+      </div>
+      <div class="stat-card">
+        <h2>Total Montant Payé</h2>
+        <p>{{ totalPaid }} €</p>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <div class="chart-container">
+    <h2 class="title">Statistiques des Événements</h2>
+    
+    <!-- Conteneur pour les graphiques -->
+    <div class="charts-grid">
+      <!-- Graphique des tickets par type -->
+      <div class="chart-card">
+        <h3 class="chart-title">Tickets par type</h3>
+        <canvas id="ticketsByTypeChart"></canvas>
+      </div>
+  
+      <!-- Graphique des participants par événement -->
+      <div class="chart-card">
+        <h3 class="chart-title">Participants par événement</h3>
+        <canvas id="usersPerEventChart"></canvas>
+      </div>
+  
+      <!-- Graphique des meilleurs événements -->
+      <div class="chart-card">
+        <h3 class="chart-title">Top événements</h3>
+        <canvas id="topEventsChart"></canvas>
+      </div>
+  
+      <!-- Graphique des tickets par statut -->
+      <div class="chart-card">
+        <h3 class="chart-title">Tickets par statut</h3>
+        <canvas id="ticketsByStatusChart"></canvas>
+      </div>
+    </div>
+  </div>
+  

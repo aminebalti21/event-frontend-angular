@@ -9,7 +9,9 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
   private apiUrl = 'http://localhost:3000/auth'; // URL de l'API d'authentification
   private eventApiUrl = 'http://localhost:3000/events';
-  private apiUrl2 = 'http://localhost:3000/users/users'; // URL de l'API pour la gestion des événements
+  private apiUrl2 = 'http://localhost:3000/users/users';
+  baseUrltic='http://localhost:3000/tickets'; // URL de l'API pour la gestion des événements
+  private apiUrlp = 'http://localhost:3000/participants';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -22,7 +24,11 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, user);
     
   }
-
+  getEventById(eventId: string): Observable<any> {
+    return this.http.get(`${this.eventApiUrl}/${eventId}`);
+  }
+  
+  
   // Méthodes pour la gestion des événements
   createEvent(event: any): Observable<any> {
     const headers = this.getAuthHeaders(); // Récupérer les en-têtes avec le token
@@ -132,4 +138,34 @@ export class AuthService {
     const headers = this.getAuthHeaders();
     return this.http.delete(`${this.apiUrl2}/${id}`, { headers });
   }
+
+
+
+
+
+
+  getTicketsByType(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrltic}/tickets-by-type`);
+  }
+
+  // Récupérer le nombre de participants par événement
+  getUsersPerEvent(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlp}/users-per-event`);
+  }
+
+  // Récupérer les meilleurs événements
+  getTopEvents(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlp}/top-events`);
+  }
+
+  // Récupérer les tickets par statut
+  getTicketsByStatus(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrltic}/tickets-by-status`);
+  }
+
+
+  
+  
+  
+  
 }

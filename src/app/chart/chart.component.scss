@@ -1,0 +1,75 @@
+.chart-container {
+    padding: 20px;
+    background-image: url('/statistiics-1.png'); /* Utiliser le chemin relatif correct */
+    background-size: cover; /* Couvre toute la zone */
+    background-position: center; /* Centrer l'image */
+    background-attachment: fixed; /* L'image reste fixe lorsque l'on fait défiler la page */
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur les petits écrans */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .chart-card {
+   
+    
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .chart-title {
+    font-size: 1.5rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 768px) {
+    .charts-grid {
+      grid-template-columns: 1fr; /* Une seule colonne sur les petits écrans */
+    }
+  
+    .chart-card {
+      padding: 15px;
+    }
+  
+    .title {
+      font-size: 2rem;
+    }
+  
+    .chart-title {
+      font-size: 1.2rem;
+    }
+  }
+  
+  

@@ -93,5 +93,7 @@ export class EventManagementComponent implements OnInit {
     this.authService.logout(); // Appeler la méthode logout du service
   }
   // Supprimer un événement
- 
+  goToTarget() {
+    this.router.navigate(['/list']); // Naviguer vers la route cible
+  }
 }

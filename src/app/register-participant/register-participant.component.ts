@@ -44,6 +44,9 @@ export class RegisterParticipantComponent {
         },
       });
     }
+    goToTarget() {
+      this.router.navigate(['/login']); // Naviguer vers la route cible
+    }
     
   }
 

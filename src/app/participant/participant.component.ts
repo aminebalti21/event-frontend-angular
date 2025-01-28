@@ -54,7 +54,7 @@ export class ParticipantComponent implements OnInit {
       alert("Utilisateur non authentifié !");
       return;
     }
-
+  
     this.participantService.registerForEvent(eventId, ticketType, this.userId).subscribe({
       next: (response) => {
         alert(`Inscription réussie pour le billet ${ticketType}!`);
@@ -62,7 +62,7 @@ export class ParticipantComponent implements OnInit {
         this.router.navigate(['/payment'], {
           queryParams: {
             ticketType: response.ticketType,
-            
+            amount: response.amount, // Ajouter le prix
             eventId: eventId,
             userId: this.userId
           }
@@ -74,6 +74,7 @@ export class ParticipantComponent implements OnInit {
       }
     });
   }
+  
   getPhotoUrl(photoPath: string | null): string {
     if (!photoPath) {
       return 'assets/default-image.jpg'; // Chemin de l'image par défaut

@@ -5,7 +5,8 @@
       <p><strong>Événement :</strong> {{ eventId }}</p>
       <p><strong>Utilisateur :</strong> {{ userId }}</p>
       <p><strong>Type de billet :</strong> {{ ticketType }}</p>
-      <p><strong>Montant :</strong> {{ price / 100 | currency: 'USD' }}</p> <!-- Assurez-vous que 'amount' est en cents, donc on divise par 100 -->
+      
+      <p><strong>Montant :</strong> {{ amount / 100 | currency: 'USD' }}</p> <!-- Assurez-vous que 'amount' est en cents, donc on divise par 100 -->
     </div>
   
     <button (click)="pay()" class="pay-button">Payer maintenant</button>

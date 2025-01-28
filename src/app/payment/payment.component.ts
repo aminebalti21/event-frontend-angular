@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { PaymentService } from '../../services/payment.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-payment',
@@ -16,31 +17,22 @@ export class PaymentComponent implements OnInit {
   eventId!: string;
   userId!: string;
   ticketType!: string;
-  price!: number;
+  
+  amount!: number;
 
-  constructor(private route: ActivatedRoute, private router: Router,private PaymentService:PaymentService) {}
+  constructor(private route: ActivatedRoute, private router: Router,private PaymentService:PaymentService,private AuthService:AuthService) {}
 
   ngOnInit(): void {
-    // Récupérer les paramètres de l'URL
+    // Récupérer les queryParams
     this.route.queryParams.subscribe(params => {
+      this.ticketType = params['ticketType'];
+      this.amount = params['amount'];
       this.eventId = params['eventId'];
       this.userId = params['userId'];
-      this.ticketType = params['ticketType'];
       
-
-      // Vérification si les paramètres sont bien présents
-      if (!this.eventId || !this.userId || !this.ticketType ) {
-        console.error('Paramètres manquants :', {
-          eventId: this.eventId,
-          userId: this.userId,
-          ticketType: this.ticketType,
-          
-        });
-        alert('Paramètres manquants, redirigez l\'utilisateur vers la page d\'inscription.');
-      }
     });
   }
-
+ 
   pay(): void {
     if (!this.eventId || !this.userId || !this.ticketType ) {
       console.error('Erreur de paiement : Paramètres manquants');
@@ -56,7 +48,7 @@ export class PaymentComponent implements OnInit {
           userId: this.userId,
           type: this.ticketType,
           status: 'paid',
-          price: this.price,
+          price: this.amount,
           purchasedAt: new Date(),
         };
 

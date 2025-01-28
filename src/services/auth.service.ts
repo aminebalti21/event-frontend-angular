@@ -110,13 +110,23 @@ export class AuthService {
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     if (!token) {
-      this.router.navigate(['/login']); // Rediriger si pas de token
+      this.router.navigate(['/login']); // Redirige vers login
       throw new Error('Utilisateur non authentifié.');
     }
+  
+    // Vérifie si le token est valide
+    const decodedToken = this.decodeToken(token);
+    if (!decodedToken || Date.now() >= decodedToken.exp * 1000) {
+      localStorage.removeItem('token'); // Supprime le token expiré
+      this.router.navigate(['/login']); // Redirige
+      throw new Error('Token expiré ou invalide.');
+    }
+  
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
   }
+  
 
 
 

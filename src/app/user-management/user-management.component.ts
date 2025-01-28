@@ -40,7 +40,7 @@ export class UserManagementComponent implements OnInit {
           this.loadUsers();
         } else {
           alert("Vous n'avez pas l'autorisation d'accéder à cette page.");
-          this.router.navigate(['/participant']); // Rediriger vers la page des participants si ce n'est pas un admin
+          this.router.navigate(['/login']); // Rediriger vers la page des participants si ce n'est pas un admin
         }
       },
       (error) => {

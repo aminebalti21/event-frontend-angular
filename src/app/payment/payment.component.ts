@@ -5,11 +5,21 @@ import { Component, OnInit } from '@angular/core';
 import { PaymentService } from '../../services/payment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatLineModule, MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule,FormsModule,ReactiveFormsModule,MatCardModule,MatOptionModule,
+    MatFormFieldModule, MatInputModule,MatIconModule,MatTableModule,MatSelectModule,MatListModule],
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss'],
 })
@@ -64,4 +74,9 @@ export class PaymentComponent implements OnInit {
         console.error('Erreur lors de la création de la session de paiement :', error);
       });
   }
+  goBack(): void {
+    this.router.navigate(['/participant']); // Redirige vers la page de liste des événements
+  }
+  
+
 }

@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { ListOrgComponent } from './list-org/list-org.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import {  ChartComponent } from './chart/chart.component';
+import { MyTicketsComponent } from './my-tickets/my-tickets.component';
 
 export const routes: Routes = [
         { path: 'register', component: RegisterComponent },
@@ -29,5 +30,6 @@ export const routes: Routes = [
         {path:'register-participant' ,component:RegisterParticipantComponent},
         { path: 'payment-success', component: PaymentSuccessComponent },
         { path: 'payment-cancel', component: PaymentCancelComponent },
-        {path: 'chart' , component:ChartComponent}
+        {path: 'chart' , component:ChartComponent},
+        { path: 'my-tickets', component: MyTicketsComponent }
 ];

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'; // Importer FormsModule
 import { AuthService } from '../../services/auth.service';  // Assurez-vous que le service AuthService est importé
 import { CommonModule } from '@angular/common';  // Importer CommonModule pour les fonctionnalités de base d'Angular
 import { HttpClientModule } from '@angular/common/http';  // Pour l'HTTP, assurez-vous d'importer HttpClientModule
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,8 +17,10 @@ export class RegisterComponent {
   user = { name: '', email: '', password: '', role: 'Admin' };  // Par défaut, le rôle est "admin"
   error: string | null = null;
 
-  constructor(private authService: AuthService) {}
-
+  constructor(private authService: AuthService, private router:Router) {}
+  goToTarget() {
+    this.router.navigate(['/login']); // Naviguer vers la route cible
+  }
   onSubmit() {
     // Vérifiez si les champs sont valides avant de soumettre
     if (!this.user.name || !this.user.email || !this.user.password) {

@@ -6,16 +6,19 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ParticipantService } from '../../services/participant.service';
 import { PaymentComponent } from '../payment/payment.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-participant',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule,MatIconModule],
   templateUrl: './participant.component.html',
   styleUrls: ['./participant.component.scss']
 })
 export class ParticipantComponent implements OnInit {
   events: any[] = [];
+  filteredEvents: any[] = [];
+  searchTerm: string = '';
   error: string | null = null;
   userId: number | null = null;
 
@@ -41,12 +44,27 @@ export class ParticipantComponent implements OnInit {
     this.authService.getEvents().subscribe({
       next: (data) => {
         this.events = data;
+        this.filteredEvents = data; // Initialize filteredEvents with all events
       },
       error: (err) => {
         this.error = 'Erreur lors du chargement des événements.';
         console.error(err);
       }
     });
+  }
+
+  filterEvents(): void {
+    if (!this.searchTerm) {
+      this.filteredEvents = this.events;
+    } else {
+      this.filteredEvents = this.events.filter(event =>
+        event.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        event.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        event.location.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        event.type.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        event.theme.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
   }
 
   register(eventId: number, ticketType: string): void {
@@ -74,14 +92,50 @@ export class ParticipantComponent implements OnInit {
       }
     });
   }
-  
+
   getPhotoUrl(photoPath: string | null): string {
     if (!photoPath) {
       return 'assets/default-image.jpg'; // Chemin de l'image par défaut
     }
     return `http://localhost:3000/${photoPath}`; // Remplacer par l'URL de votre serveur backend
   }
+
   onLogout() {
     this.authService.logout(); // Appeler la méthode logout du service
   }
+
+  scrollToEvents(): void {
+    const element = document.getElementById('events');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  scrollToacc(): void {
+    const element = document.getElementById('acc');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+
+  scrollTotesto(): void {
+    const element = document.getElementById('testo');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+
+  scrollToaide(): void {
+    const element = document.getElementById('aide');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  viewMyTickets(): void {
+    this.router.navigate(['/my-tickets']); // Redirection vers la page des tickets
+  }
+
+
 }

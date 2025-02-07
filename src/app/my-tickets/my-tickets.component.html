@@ -1,0 +1,39 @@
+<div class="back-button">
+    <button mat-stroked-button color="accent" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon> Retour à la liste des événements
+    </button>
+  </div>
+<div *ngIf="tickets.length > 0; else noTickets" class="tickets-container">
+    <h2 class="title">🎟️ Mes Tickets Payés</h2>
+    
+    <div class="tickets-grid">
+      <mat-card *ngFor="let ticket of tickets" class="ticket-card" appearance="outlined">
+        <mat-card-header>
+          <div mat-card-avatar class="ticket-avatar">
+            <mat-icon>event</mat-icon>
+          </div>
+          <mat-card-title>{{ ticket.Event.title }}</mat-card-title>
+          <mat-card-subtitle>{{ ticket.Event.date | date }}</mat-card-subtitle>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <p><mat-icon>place</mat-icon> Lieu : {{ ticket.Event.location }}</p>
+          <p><mat-icon>confirmation_number</mat-icon> Type : {{ ticket.type }}</p>
+          <p><mat-icon>euro</mat-icon> Prix : {{ ticket.price / 100 }} €</p>
+          <p>
+            <mat-icon [ngClass]="{'paid': ticket.status === 'paid', 'pending': ticket.status === 'pending'}">
+              {{ ticket.status === 'paid' ? 'check_circle' : 'hourglass_empty' }}
+            </mat-icon>
+            Statut : {{ ticket.status }}
+          </p>
+        </mat-card-content>
+  
+        
+      </mat-card>
+    </div>
+  </div>
+  
+  <ng-template #noTickets>
+    <p class="no-tickets">Aucun ticket payé trouvé.</p>
+  </ng-template>
+  

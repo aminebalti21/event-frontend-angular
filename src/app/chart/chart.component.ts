@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { AuthService } from '../../services/auth.service';
 import { ParticipantService } from '../../services/participant.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-chart',
   standalone: true,
+  imports:[MatCardModule,MatToolbarModule],
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
@@ -16,7 +20,7 @@ export class ChartComponent implements OnInit {
   totalEvents: any;  // Initialiser à 0
   totalPaid: any;  // Initialiser à 0
   
-  constructor(private authService: AuthService, private ParticipantService:ParticipantService) {}
+  constructor(private authService: AuthService, private ParticipantService:ParticipantService, private router:Router) {}
  
   ngOnInit(): void {
     this.loadGlobalStats;
@@ -25,7 +29,9 @@ export class ChartComponent implements OnInit {
     this.loadTopEvents();
     this.loadTicketsByStatus();
   }
-
+  goBack(): void {
+    this.router.navigate(['/participant']); // Redirige vers la page de liste des événements
+  }
   loadTicketsByType(): void {
     this.authService.getTicketsByType().subscribe({
       next: (data) => {

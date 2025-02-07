@@ -1,0 +1,226 @@
+.container {
+    padding: 20px;
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  /* Barre de navigation */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f0f4f8;
+}
+
+.header button {
+  display: flex;
+  align-items: center;
+  color: #b92929;
+  font-size: 16px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 85%;
+}
+
+.header mat-icon {
+  margin-right: 8px;
+}
+
+  h2 {
+    color: #2c3e50;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+ 
+
+
+  /* Formulaire d'édition */
+  .edit-form {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .edit-form h3 {
+    color: #2c3e50;
+    font-size: 22px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Champs de formulaire Angular Material */
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  /* Ajout d'une bordure et d'une animation de focus pour les inputs */
+  input[matInput],
+  .mat-select-trigger {
+    padding: 12px;           /* Un peu plus d'espace interne */
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    width: 100%;             /* Pour occuper toute la largeur du conteneur */
+    font-size: 16px;         /* Augmentation de la taille de la police si nécessaire */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  
+  input[matInput]:focus,
+  .mat-select-trigger:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 8px rgba(41, 128, 185, 0.6);
+    outline: none;
+  }
+  
+  /* Personnalisation du panneau de sélection */
+  
+  
+  /* Assurez-vous que le conteneur d'overlay est au-dessus des autres éléments */
+  
+  
+  /* Tableau stylisé */
+  .mat-elevation-z8 {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  th {
+    background-color: #34495e;
+    color: hsl(247, 93%, 22%);
+    text-transform: uppercase;
+    padding: 12px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: oblique;
+  }
+  
+  td {
+    color: hsl(247, 99%, 65%);
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #eaf2f8;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  tr:hover {
+    background-color: #d6eaf8;
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+  }
+  
+  /* Boutons stylisés */
+  button[mat-raised-button] {
+    margin: 5px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.3s ease;
+  }
+  
+  button[mat-raised-button]:hover {
+    transform: scale(1.1);
+    background-color: #1abc9c !important;
+    color: white;
+  }
+  
+  button[color="primary"] {
+    background-color: #2980b9;
+    color: white;
+  }
+  
+  button[color="warn"] {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  /* Animation d'apparition */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Alerte */
+  .alert {
+    padding: 15px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    animation: shake 0.5s;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+  }
+ 
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    appearance: none; /* Pour supprimer l'apparence native sur certains navigateurs */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%233298B9" d="M6 9l4-5H2z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+  }
+  
+  .form-group select:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 8px rgba(41, 128, 185, 0.6);
+    outline: none;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  

@@ -43,6 +43,9 @@ export class EditEventComponent implements OnInit {
       });
     }
   }
+  goToTarget() {
+    this.router.navigate(['/list']); // Naviguer vers la route cible
+  }
 
   // Gestion du fichier sélectionné
   onFileSelected(event: any): void {

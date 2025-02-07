@@ -120,4 +120,7 @@ export class EventManagementComponent implements OnInit {
   goToTarget() {
     this.router.navigate(['/list']); // Naviguer vers la route cible
   }
+  goToTargetchart() {
+    this.router.navigate(['/chart']); // Naviguer vers la route cible
+  }
 }

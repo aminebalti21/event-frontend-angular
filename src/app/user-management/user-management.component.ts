@@ -5,11 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';  // Import ReactiveFormsModule
 import { AuthService } from '../../services/auth.service';
 import {  Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatOption, MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {  MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule],  // Ajouter ReactiveFormsModule
+  imports: [CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule,MatCardModule,MatOptionModule,
+    MatFormFieldModule, MatInputModule,MatIconModule,MatTableModule,MatSelectModule,],  // Ajouter ReactiveFormsModule
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.scss'],
 })
@@ -30,7 +38,9 @@ export class UserManagementComponent implements OnInit {
   ngOnInit(): void {
     this.checkAdminAccess();
   }
-
+  onLogout() {
+    this.authService.logout(); // Appeler la méthode logout du service
+  }
   // Vérifier si l'utilisateur est un admin
   checkAdminAccess(): void {
     this.authService.getCurrentUser().subscribe(

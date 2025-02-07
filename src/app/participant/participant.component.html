@@ -1,49 +1,205 @@
-<h2>Liste des événements</h2>
-<button (click)="onLogout()">Se déconnecter</button>
-<div *ngIf="events.length === 0">Aucun événement trouvé.</div>
+<div class="events-page">
 
-<ul>
-  <li *ngFor="let event of events">
-    <div class="event-card">
-      <!-- Photo de l'événement -->
-      <img 
-        [src]="getPhotoUrl(event.photo)" 
-        alt="Photo de {{ event.title }}" 
-        class="event-image" 
-      />
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="logoevent">
+    </div>
 
-      <!-- Détails de l'événement -->
-      <h3>{{ event.title }}</h3>
-      <p><strong>Description :</strong> {{ event.description }}</p>
-      <p><strong>Date :</strong> {{ event.date | date: 'dd/MM/yyyy' }}</p>
-      <p><strong>Heure :</strong> {{ event.time }}</p>
-      <p><strong>Lieu :</strong> {{ event.location }}</p>
-      <p><strong>Capacité :</strong> {{ event.maxCapacity }}</p>
-      <p><strong>Type :</strong> {{ event.type }}</p>
-      <p><strong>Thème :</strong> {{ event.theme }}</p>
+    <ul>
+      <li><a (click)="scrollToacc()">Accueil </a></li>
+      <li><a (click)="scrollToEvents()">Événements associés</a></li>
+      <li><a (click)="scrollTotesto()">Nos services</a></li>
+      <li><a (click)="scrollToaide()">Aide </a></li>
+    </ul>
 
-      <!-- Section d'inscription -->
-      <div class="registration-section">
-        <p><strong>Inscription :</strong></p>
-        <button 
-          *ngIf="event.maxCapacity > 0" 
-          (click)="register(event.id, 'Standard')">
-          S'inscrire (Standard)
+    <div class="logout">
+      <button (click)="onLogout()">
+        <span class="material-icons">logout</span> Se déconnecter
+      </button>
+      <button mat-raised-button color="primary" (click)="viewMyTickets()">
+        <mat-icon>confirmation_number</mat-icon> Consulter Mes Tickets
+      </button>
+    </div>
+  </nav>
+
+  <header id="acc">
+    <div class="text">
+      <h1>Les meilleures plateformes pour trouver des événements dans le monde entier</h1>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem nam temporibus, at iure recusandae minima quos quibusdam quod maiores consequatur modi maxime aperiam voluptas, rem suscipit laborum beatae doloribus sed.</p>
+      <div class="btnn">
+        <button>
+          <span class="material-icons">travel_explore</span> Discover more
         </button>
-        <button 
-          *ngIf="event.maxCapacity > 0" 
-          (click)="register(event.id, 'Premium')">
-          S'inscrire (Premium)
-        </button>
-        <button 
-          *ngIf="event.maxCapacity > 0" 
-          (click)="register(event.id, 'VIP')">
-          S'inscrire (VIP)
-        </button>
-        <p *ngIf="event.maxCapacity === 0" class="full-capacity">
-          Événement complet
-        </p>
       </div>
     </div>
-  </li>
-</ul>
+  </header>
+
+  <div  id="events" class="container">
+    <h2>Liste des événements</h2>
+
+    <!-- Search Input -->
+    <div class="search-container">
+      <span class="material-icons">search</span>
+  <input 
+     class="custom"
+    type="text" 
+    [(ngModel)]="searchTerm" 
+    placeholder="Rechercher un événement..." 
+    (input)="filterEvents()"
+  />
+    </div>
+
+    <div *ngIf="filteredEvents.length === 0">Aucun événement trouvé.</div>
+
+    <ul>
+      <li *ngFor="let event of filteredEvents">
+        <div class="event-card">
+          <!-- Photo de l'événement -->
+          <img 
+            [src]="getPhotoUrl(event.photo)" 
+            alt="Photo de {{ event.title }}" 
+            class="event-image" 
+          />
+
+          <!-- Détails de l'événement -->
+          <div class="Main-info">
+            <div class="text">
+              <h3>{{ event.title }}</h3>
+              <p><span class="material-icons">description</span> <strong>Description :</strong> {{ event.description }}</p>
+              <p><span class="material-icons">event</span> <strong>Date :</strong> {{ event.date | date: 'dd/MM/yyyy' }}</p>
+              <p><span class="material-icons">schedule</span> <strong>Heure :</strong> {{ event.time }}</p>
+              <p><span class="material-icons">location_on</span> <strong>Lieu :</strong> {{ event.location }}</p>
+              <p><span class="material-icons">groups</span> <strong>Capacité :</strong> {{ event.maxCapacity }}</p>
+              <p><span class="material-icons">category</span> <strong>Type :</strong> {{ event.type }}</p>
+              <p><span class="material-icons">palette</span> <strong>Thème :</strong> {{ event.theme }}</p>
+            </div>
+
+            <!-- Section d'inscription -->
+            <div class="registration-section">
+              <p><strong class="inscri">Inscription :</strong></p>
+              <div class="btn1">
+                <button *ngIf="event.maxCapacity > 0" (click)="register(event.id, 'Standard')">
+                  <span class="material-icons">person</span> S'inscrire (Standard)
+                </button>
+                <button *ngIf="event.maxCapacity > 0" (click)="register(event.id, 'Premium')">
+                  <span class="material-icons">star</span> S'inscrire (Premium)
+                </button>
+              </div>
+              
+              <div class="btn2">
+                <button *ngIf="event.maxCapacity > 0" (click)="register(event.id, 'VIP')">
+                  <span class="material-icons">workspace_premium</span> S'inscrire (VIP)
+                </button>
+              </div>
+            </div>
+            <p *ngIf="event.maxCapacity === 0" class="full-capacity">
+              Événement complet
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="testo" class='testimonails'>
+    <div class='text'>
+      <h1>What Clients Say</h1>
+      <p>We place huge value on strong relationships and have seen the benefits they bring to our buisness. Customer feedback is vital in helping us to get it right</p>
+    </div>
+    <div class='cards'>
+      <div class='card'>
+          <img src="avatar1.jpeg" alt="" />
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ducimus incidunt molestias veritatis nisi vitae voluptate quae sunt, aliquid impedit, doloremque sint rem facere excepturi, doloribus neque ipsa numquam unde.</p>
+          <div class='client_name'>
+              <h4>Bob Almeda</h4>
+              <p>Chef Assisttant</p>
+          </div>
+      </div>
+      <div class='card'>
+          <img src="avatar2.jpeg" alt="" />
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ducimus incidunt molestias veritatis nisi vitae voluptate quae sunt, aliquid impedit, doloremque sint rem facere excepturi, doloribus neque ipsa numquam unde.</p>
+          <div class='client_name'>
+              <h4>Chris jake</h4>
+              <p>Developper</p>
+          </div>
+      </div>
+      <div class='card'>
+          <img src="avatar3.jpeg" alt="" />
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ducimus incidunt molestias veritatis nisi vitae voluptate quae sunt, aliquid impedit, doloremque sint rem facere excepturi, doloribus neque ipsa numquam unde.</p>
+          <div class='client_name'>
+              <h4>Eric besos</h4>
+              <p>Chef Assisttant</p>
+          </div>
+      </div>
+    </div>
+
+
+</div>
+
+
+<div id="aide" class='footer'>
+  <h1>FunnerEvents</h1>
+  <div  class='main'>
+
+      <div class='link'>
+          <h3>Utiliser FunnerEvents</h3>
+          <div class='links-list'>
+              <p>Logiciel de billetterie</p>
+              <p>Tarifs</p>
+              <p>Plan de salle</p>
+              <p>Les possibilitées</p>
+              <p>cart du site</p>
+              <p>externe</p>
+          </div>
+      </div>
+
+      <div class='link'>
+      <h3>Utiliser FunnerEvents</h3>
+      <div class='links-list'>
+      <p>Logiciel de billetterie</p>
+              <p>Tarifs</p>
+              <p>Plan de salle</p>
+              <p>Les possibilitées</p>
+              <p>cart du site</p>
+              <p>externe</p>
+              </div>
+      </div>
+
+
+      <div class='link'>
+      <h3>Utiliser FunnerEvents</h3>
+
+      <div class='links-list'>
+      <p>Logiciel de billetterie</p>
+              <p>Tarifs</p>
+              <p>Plan de salle</p>
+              <p>Les possibilitées</p>
+              <p>cart du site</p>
+              <p>externe</p>
+              </div>
+
+
+
+      </div>
+
+      <div class='link'>
+      <h3>Utiliser FunnerEvents</h3>
+
+      <div class='links-list'>
+      <p>Logiciel de billetterie</p>
+              <p>Tarifs</p>
+              <p>Plan de salle</p>
+              <p>Les possibilitées</p>
+              <p>cart du site</p>
+              <p>externe</p>
+              </div>
+
+      </div>
+      
+      
+
+
+  </div>
+</div>
+
+</div>

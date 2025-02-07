@@ -1,41 +1,77 @@
-<h2>Modifier l'Événement</h2>
-<form (ngSubmit)="onSubmit()">
-  <div>
-    <label>Titre :</label>
-    <input [(ngModel)]="eventData.title" name="title" required />
-  </div>
-  <div>
-    <label>Description :</label>
-    <textarea [(ngModel)]="eventData.description" name="description" required></textarea>
-  </div>
-  <div>
-    <label>Lieu :</label>
-    <input [(ngModel)]="eventData.location" name="location" required />
-  </div>
-  <div>
-    <label>Date :</label>
-    <input type="date" [(ngModel)]="eventData.date" name="date" required />
-  </div>
-  <div>
-    <label>Heure :</label>
-    <input type="time" [(ngModel)]="eventData.time" name="time" required />
-  </div>
-  <div>
-    <label>Capacité Maximale :</label>
-    <input type="number" [(ngModel)]="eventData.maxCapacity" name="maxCapacity" required />
-  </div>
-  <div>
-    <label>Type :</label>
-    <input [(ngModel)]="eventData.type" name="type" required>
+<div class="event-management-container">
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="logoevent">
+    </div>
+    
+  </nav>
+  <hr>
+  
+  <div class="container-main">
+    <div class="left">
       
+      <h2>Modifier l'Événement</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="fr1">
+          <div class="flex-column">
+            <label for="title">Titre :</label>
+            <input id="title" [(ngModel)]="eventData.title" name="title" required />
+          </div>
+          <div class="flex-column">
+            <label for="type">Type :</label>
+            <input id="type" [(ngModel)]="eventData.type" name="type" required />
+          </div>
+        </div>
+        
+        <div class="textarea">
+          <label for="description">Description :</label>
+          <textarea id="description" [(ngModel)]="eventData.description" name="description" required></textarea>
+        </div>
+        
+        <div class="fr1">
+          <div class="flex-column">
+            <label for="date">Date :</label>
+            <input type="date" id="date" [(ngModel)]="eventData.date" name="date" required />
+          </div>
+          <div class="flex-column">
+            <label for="time">Heure :</label>
+            <input type="time" id="time" [(ngModel)]="eventData.time" name="time" required />
+          </div>
+        </div>
+        
+        <div class="fr1">
+          <div class="flex-column">
+            <label for="location">Lieu :</label>
+            <input id="location" [(ngModel)]="eventData.location" name="location" required />
+          </div>
+          <div class="flex-column">
+            <label for="capacity">Capacité Maximale :</label>
+            <input type="number" id="capacity" [(ngModel)]="eventData.maxCapacity" name="maxCapacity" required />
+          </div>
+        </div>
+        
+        <div class="fr1">
+          <div class="flex-column">
+            <label for="theme">Thème :</label>
+            <input id="theme" [(ngModel)]="eventData.theme" name="theme" required />
+          </div>
+          <div class="flex-column">
+            <label for="photo">Nouvelle photo (facultatif) :</label>
+            <input type="file" (change)="onFileSelected($event)" name="photo" />
+          </div>
+        </div>
+        
+        <div class="bttn">
+          <button type="submit">Enregistrer</button>
+          <button class="btanuler" (click)="goToTarget()">
+            <span class="material-icons">cancel</span> Anuuler
+          </button>
+        </div>
+        
+      </form>
+    </div>
+    <div class="right">
+      <img src="eventcreate.png" alt="">
+    </div>
   </div>
-  <div>
-    <label>Thème :</label>
-    <input [(ngModel)]="eventData.theme" name="theme" required />
-  </div>
-  <div>
-    <label for="photo">Nouvelle photo (facultatif) :</label>
-    <input type="file" (change)="onFileSelected($event)" name="photo" />
-  </div>
-  <button type="submit">Enregistrer</button>
-</form>
+</div>

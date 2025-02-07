@@ -1,0 +1,84 @@
+.back-button {
+    text-align: left;
+    margin: 15px;
+  
+    button {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background-color: #3f51b5;
+      border-radius: 10px;
+      color: #f9f9f9;
+    }
+    button:hover{
+      box-shadow: 5px 5px 10px black;
+      cursor: pointer;
+    }
+  
+    mat-icon {
+      font-size: 20px;
+    }
+  }
+  
+  .tickets-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .title {
+    color: #3f51b5;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .tickets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+  }
+  
+  .ticket-card {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: white;
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .ticket-avatar {
+    background-color: #3f51b5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  mat-icon {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  
+  .paid {
+    color: green;
+  }
+  
+  .pending {
+    color: orange;
+  }
+  
+  .no-tickets {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #757575;
+    margin-top: 20px;
+  }
+  

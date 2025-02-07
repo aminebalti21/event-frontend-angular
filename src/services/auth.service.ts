@@ -14,7 +14,9 @@ export class AuthService {
   private apiUrlp = 'http://localhost:3000/participants';
 
   constructor(private http: HttpClient, private router: Router) {}
-
+  getMyTickets(): Observable<any> {
+    return this.http.get(`${this.baseUrltic}/my-tickets`);
+  }
   // Méthodes d'authentification
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials);

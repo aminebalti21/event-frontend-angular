@@ -71,6 +71,12 @@ export class ListOrgComponent implements OnInit {
     onLogout() {
       this.authService.logout(); // Appeler la méthode logout du service
     }
+    oncree() {
+      this.router.navigate(['/event-management']); // Naviguer vers la route cible
+    }
+    goToTargetchart() {
+      this.router.navigate(['/chart']); // Naviguer vers la route cible
+    }
     // Supprimer un événement
     deleteEvent(id: number): void {
       if (confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) {

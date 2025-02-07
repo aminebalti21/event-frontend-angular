@@ -1,14 +1,36 @@
 <div class="payment-container">
-    <h2>Finaliser le paiement</h2>
-  
-    <div class="ticket-details">
-      <p><strong>Événement :</strong> {{ eventId }}</p>
-      <p><strong>Utilisateur :</strong> {{ userId }}</p>
-      <p><strong>Type de billet :</strong> {{ ticketType }}</p>
-      
-      <p><strong>Montant :</strong> {{ amount / 100 | currency: 'USD' }}</p> <!-- Assurez-vous que 'amount' est en cents, donc on divise par 100 -->
-    </div>
-  
-    <button (click)="pay()" class="pay-button">Payer maintenant</button>
-  </div>
-  
+  <mat-card class="payment-card">
+    <mat-card-header>
+      <mat-card-title>💳 Finaliser le Paiement</mat-card-title>
+      <mat-card-subtitle>Veuillez vérifier les détails avant de procéder</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="ticket-details">
+        <mat-list>
+          <mat-list-item>
+            <strong>Événement :</strong> {{ eventId }}
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Utilisateur :</strong> {{ userId }}
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Type de billet :</strong> {{ ticketType }}
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Montant :</strong> {{ amount / 10 | currency: 'USD' }}
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-stroked-button color="warn" (click)="goBack()">
+        ❌ Annuler
+      </button>
+      <button mat-raised-button color="primary" (click)="pay()" class="pay-button">
+        💰 Payer maintenant
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

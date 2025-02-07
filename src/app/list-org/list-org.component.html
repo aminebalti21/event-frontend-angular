@@ -1,16 +1,52 @@
-<div>
-<h2>Liste des événements</h2>
+<div class="org-list">
+
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="logoevent">
+    </div>
+    <div class="list-button">
+      <div class="list-button">
+
+        <button (click)="oncree()">
+          <span class="material-icons">event</span> Crée Event
+        </button>
+        
+        <button (click)="onLogout()">
+          <span class="material-icons">logout</span> Se déconnecter
+        </button>
+        <button (click)="goToTargetchart()">
+          <span class="material-icons">bar_chart</span> Charts
+        </button>
+       
+      
+     
+      </div>
+      
+      </div>
+  </nav>
+
+<div class="title">
+    <h2>Liste des événements</h2>
+  </div>
+  
+  
+
+
     <div *ngIf="events.length === 0">Aucun événement trouvé.</div>
-    <ul>
+
+
+    <ul >
       <li *ngFor="let event of events">
-        <div class="event-card">
-          
+
+
+        <div class="event-card"> 
             <img 
   [src]="getPhotoUrl(event.photo)" 
   alt="Photo de {{ event.title }}" 
   class="event-image" 
 />
-          
+          <div class="Main-info">
+            <div class="text">
           <h3>{{ event.title }}</h3>
           <p><strong>Description :</strong> {{ event.description }}</p>
           <p><strong>Date :</strong> {{ event.date | date: 'dd/MM/yyyy' }}</p>
@@ -19,10 +55,20 @@
           <p><strong>Capacité :</strong> {{ event.maxCapacity }}</p>
           <p><strong>type :</strong> {{ event.type }}</p>
           <p><strong>theme :</strong> {{ event.theme }}</p>
-          <button (click)="editEvent(event.id)">Modifier</button>
-          <button (click)="deleteEvent(event.id)">Supprimer</button>
+        </div>
+          <div class="btn"> 
+            <button (click)="editEvent(event.id)">
+              <span class="material-icons">edit</span> Modifier
+            </button>
+            
+            <button (click)="deleteEvent(event.id)">
+              <span class="material-icons">delete</span> Supprimer
+            </button>
+        </div>
+
+        </div>
         </div>
       </li>
     </ul>
-  </div>
-  
+
+</div>

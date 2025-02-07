@@ -1,53 +1,100 @@
 <div class="event-management-container">
+
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="logoevent">
+    </div>
+    <div class="list-button">
+      <div class="list-button">
+        <button (click)="onLogout()">
+          <span class="material-icons">logout</span> Se déconnecter
+        </button>
+        
+        <button (click)="goToTarget()">
+          <span class="material-icons">event</span> List events
+        </button>
+        
+        <button (click)="goToTargetchart()">
+          <span class="material-icons">bar_chart</span> Charts
+        </button>
+      </div>
+      
+      </div>
+  </nav>
+  <hr>
+
     <!-- Erreur globale -->
+     <div class="container-main">
+      <div class="left">
     <div *ngIf="error" class="error-message">{{ error }}</div>
   <!-- Exemple de bouton de déconnexion dans une barre de navigation -->
-<button (click)="onLogout()">Se déconnecter</button>
-<button (click)="goToTarget()">list event</button>
+
     <!-- Formulaire de création d'événement -->
+
     <h2>Créer un événement</h2>
     <form (ngSubmit)="createEvent()">
-      <div>
+     
+      <div class="fr1">
+        <div class="flex-column">
         <label for="title">Titre :</label>
         <input id="title" [(ngModel)]="newEvent.title" name="title" required />
       </div>
-      <div>
+          <div class="flex-column">
+            <label for="type">type :</label>
+            <input id="type" [(ngModel)]="newEvent.type" name="type" required />
+      </div>
+      </div>
+
+      <div class="textarea">
         <label for="description">Description :</label>
         <textarea id="description" [(ngModel)]="newEvent.description" name="description" required></textarea>
+        
       </div>
-      <div>
+      
+
+      <div class="fr1">
+      <div class="flex-column">
         <label for="date">Date :</label>
         <input type="date" id="date" [(ngModel)]="newEvent.date" name="date" required />
       </div>
-      <div>
+      <div class="flex-column">
         <label for="time">time :</label>
         <input id="time" [(ngModel)]="newEvent.time" name="time" required />
       </div>
-      <div>
+    </div>
+
+       <div class="fr1">
+      <div class="flex-column">
         <label for="location">Lieu :</label>
         <input id="location" [(ngModel)]="newEvent.location" name="location" required />
       </div>
-      <div>
+      <div class="flex-column">
         <label for="capacity">Capacité :</label>
         <input type="number" id="capacity" [(ngModel)]="newEvent.maxCapacity" name="capacity" required />
       </div>
-      <div>
-        <label for="type">type :</label>
-        <input id="type" [(ngModel)]="newEvent.type" name="type" required />
-      </div>
-      <div>
+    </div>
+
+
+      <div class="fr1">
+      <div class="flex-column">
         <label for="theme">theme :</label>
         <input id="theme" [(ngModel)]="newEvent.theme" name="theme" required />
       </div>
-      <div>
+      <div class="flex-column">
         <label for="photo">photo :</label>
         <input type="file" (change)="onFileSelected($event)" name="photo" />
       </div>
-      
+    </div>
+        <div class="bttn">
       <button type="submit">Créer l'événement</button>
+    </div>
     </form>
+  </div>
+  <div class="right">
+    <img src="eventcreate.png" alt="">
+  </div>
   
     <!-- Liste des événements -->
-    
+  </div>
   </div>
   

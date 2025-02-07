@@ -43,9 +43,6 @@ export class EditEventComponent implements OnInit {
       });
     }
   }
-  goToTarget() {
-    this.router.navigate(['/list']); // Naviguer vers la route cible
-  }
 
   // Gestion du fichier sélectionné
   onFileSelected(event: any): void {
@@ -54,7 +51,9 @@ export class EditEventComponent implements OnInit {
       this.selectedFile = file;
     }
   }
-
+  goToTarget(): void {
+    this.router.navigate(['/list']); // Redirection vers la page des tickets
+  }
   // Soumettre le formulaire
   onSubmit() {
     if (this.eventId) {
@@ -76,7 +75,7 @@ export class EditEventComponent implements OnInit {
       this.authService.updateEvent(this.eventId, formData).subscribe({
         next: () => {
           alert('Événement mis à jour avec succès !');
-          this.router.navigate(['/event-management']);
+          this.router.navigate(['/list']);
         },
         error: (err) => console.error('Erreur lors de la mise à jour :', err),
       });
